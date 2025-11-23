@@ -18,7 +18,7 @@ public class ExampleMixin {
 		ordinal = 0,
 		argsOnly = true
 	)
-	private float neutralizeMaceDamage(ServerWorld world, DamageSource source, float originalAmount) {
+	private float neutralizeMaceDamage(float originalAmount, ServerWorld world, DamageSource source) {
 		// Check if damage is from a player attack
 		if (source.getAttacker() instanceof PlayerEntity attacker) {
 			// Get the item the attacker is holding
