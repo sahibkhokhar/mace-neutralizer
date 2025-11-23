@@ -1,17 +1,17 @@
 package name.modid;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-public class MaceNeutralizerConfig {
-	private static volatile boolean enabled = true;
+	private static final AtomicBoolean enabled = new AtomicBoolean(true);
 	
 	public static boolean isEnabled() {
-		return enabled;
+		return enabled.get();
 	}
 	
 	public static void setEnabled(boolean value) {
-		enabled = value;
+		enabled.set(value);
 	}
 	
 	public static void toggle() {
-		enabled = !enabled;
+		enabled.updateAndGet(current -> !current);
 	}
 }
