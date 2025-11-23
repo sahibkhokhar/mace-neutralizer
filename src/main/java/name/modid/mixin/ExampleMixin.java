@@ -8,32 +8,29 @@ import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(LivingEntity.class)
 public class ExampleMixin {
-	@Inject(
+	@ModifyVariable(
 		at = @At("HEAD"),
 		method = "damage",
-		cancellable = true
+		ordinal = 0,
+		argsOnly = true
 	)
-	private void neutralizeMaceDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-		// Only process on server side
-		LivingEntity entity = (LivingEntity)(Object)this;
-		if (entity.getEntityWorld() instanceof ServerWorld) {
-			// Check if damage is from a player attack
-			if (source.getAttacker() instanceof PlayerEntity attacker) {
-				// Get the item the attacker is holding
-				ItemStack mainHandStack = attacker.getMainHandStack();
-				
-				// Check if the attacker is holding a mace
-				if (mainHandStack.isOf(Items.MACE)) {
-					// Cancel the damage - this prevents damage but allows the attack event to proceed
-					// Wind burst enchantment will still work because it triggers on attack, not damage
-					cir.setReturnValue(false);
-				}
+	private float neutralizeMaceDamage(ServerWorld world, DamageSource source, float originalAmount) {
+		// Check if damage is from a player attack
+		if (source.getAttacker() instanceof PlayerEntity attacker) {
+			// Get the item the attacker is holding
+			ItemStack mainHandStack = attacker.getMainHandStack();
+			
+			// Check if the attacker is holding a mace
+			if (mainHandStack.isOf(Items.MACE)) {
+				// Set damage to a minimal fixed amount (0.5 hearts = 1.0 damage)
+				// This allows wind burst to work while keeping damage minimal regardless of fall height
+				return 1.0f;
 			}
 		}
+		return originalAmount;
 	}
 }
