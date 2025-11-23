@@ -1,7 +1,7 @@
 package name.modid;
 
 public class MaceNeutralizerConfig {
-	private static boolean enabled = true;
+	private static volatile boolean enabled = true;
 	
 	public static boolean isEnabled() {
 		return enabled;
