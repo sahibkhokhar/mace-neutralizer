@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "mace-neutralizer",
+	"version": "${version}",
+	"name": "mace-neutralizer",
+	"description": "Removes mace damage on server side while keeping wind burst enchantment functional. Clients don't need this mod installed.",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/mace-neutralizer/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"name.modid.Maceneutralizer"
+		],
+		"client": [
+			"name.modid.MaceneutralizerClient"
+		]
+	},
+	"mixins": [
+		"mace-neutralizer.mixins.json",
+		{
+			"config": "mace-neutralizer.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.18.1",
+		"minecraft": "~1.21.10",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
