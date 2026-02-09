@@ -19,7 +19,10 @@ public class Maceneutralizer implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 
-		LOGGER.info("Mace Neutralizer mod loaded - mace damage disabled for animals and mobs!");
+		// Load configuration
+		MaceNeutralizerConfig.load();
+		
+		LOGGER.info("Mace Neutralizer mod loaded - mace damage neutralization configured!");
 		
 		// Register the command
 		MaceNeutralizerCommand.register();

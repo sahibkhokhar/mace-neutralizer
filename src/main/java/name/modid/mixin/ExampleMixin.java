@@ -31,12 +31,12 @@ public class ExampleMixin {
 			
 			// Check if the attacker is holding a mace
 			if (mainHandStack.isOf(Items.MACE)) {
-				// Only neutralize damage for animals and mobs (not players)
+				// Check if this entity type should be affected based on config
 				LivingEntity target = (LivingEntity) (Object) this;
-				if (!(target instanceof PlayerEntity)) {
-					// Set damage to a minimal fixed amount (0.5 hearts = 1.0 damage)
-					// This allows wind burst to work while keeping damage minimal regardless of fall height
-					return 1.0f;
+				if (MaceNeutralizerConfig.shouldAffectEntity(target)) {
+					// Set damage to configured amount
+					// This allows wind burst to work while keeping damage configurable
+					return MaceNeutralizerConfig.getDamageAmount();
 				}
 			}
 		}
