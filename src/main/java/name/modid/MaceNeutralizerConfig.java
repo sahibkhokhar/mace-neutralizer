@@ -356,8 +356,7 @@ public class MaceNeutralizerConfig {
 		return entity instanceof EnderDragonEntity ||
 		       entity instanceof WitherEntity ||
 		       entity instanceof WardenEntity ||
-		       entity instanceof ElderGuardianEntity ||
-		       entity.isInvulnerableTo(entity.getWorld().getDamageSources().dragonBreath());
+		       entity instanceof ElderGuardianEntity;
 	}
 	
 	/**
