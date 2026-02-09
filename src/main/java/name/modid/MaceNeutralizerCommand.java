@@ -2,6 +2,7 @@ package name.modid;
 
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.minecraft.command.DefaultPermissions;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.text.Text;
 
@@ -9,7 +10,7 @@ public class MaceNeutralizerCommand {
 	public static void register() {
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
 			dispatcher.register(CommandManager.literal("maceneutralizer")
-				.requires(source -> source.hasPermissionLevel(2)) // Requires OP level 2
+				.requires(source -> source.getPermissions().hasPermission(DefaultPermissions.GAMEMASTERS)) // Requires OP level 2
 				.then(CommandManager.literal("toggle")
 					.executes(context -> {
 						MaceNeutralizerConfig.toggle();

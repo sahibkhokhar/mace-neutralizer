@@ -14,7 +14,7 @@ Put `mace-neutralizer-1.0.0.jar` in your server's `mods` folder. Clients don't n
 
 ## Requirements
 
-- Minecraft 1.21.10
-- Fabric Loader 0.18.1+
+- Minecraft 1.21.11
+- Fabric Loader 0.18.4+
 - Java 21+
 
