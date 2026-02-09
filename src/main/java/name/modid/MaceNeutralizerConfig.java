@@ -1,6 +1,7 @@
 package name.modid;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+public class MaceNeutralizerConfig {
 	private static final AtomicBoolean enabled = new AtomicBoolean(true);
 	
 	public static boolean isEnabled() {
@@ -12,6 +13,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 	}
 	
 	public static void toggle() {
-		enabled.updateAndGet(current -> !current);
+		enabled.set(!enabled.get());
 	}
 }
