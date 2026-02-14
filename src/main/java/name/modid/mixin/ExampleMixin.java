@@ -6,6 +6,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.world.ServerWorld;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -18,7 +19,7 @@ public class ExampleMixin {
 		ordinal = 0,
 		argsOnly = true
 	)
-	private float neutralizeMaceDamage(float originalAmount, DamageSource source) {
+	private float neutralizeMaceDamage(float originalAmount, ServerWorld world, DamageSource source) {
 		// Check if mod is enabled
 		if (!MaceNeutralizerConfig.isEnabled()) {
 			return originalAmount;
